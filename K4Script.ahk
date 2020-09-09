@@ -7,7 +7,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #KeyHistory 35
 Menu, Tray, Icon, iAhk_k4.ico
-; ~^s::Reload 
+~^s::Reload 
 
 ; Fixes dumb keyboard layout of k4 since they don't let you natively remap keys 
 
@@ -34,7 +34,4 @@ F11::F10
 F12::F11
 Home::F12
 
-
-#IfWinNotActive ahk_exe osu!.exe 
-	PgDn::PgUp ; pgdn to pgup 
-#IfWinNotActive 
+PgDn::PgUp ; pgdn to pgup 

@@ -10,13 +10,13 @@ SetNumLockState, AlwaysOn ; we like num lock
 SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact 
 GroupAdd, groupCapsLock, ahk_exe osu!.exe ; yes it's a group of one no I don't want to change it 
 Menu, Tray, Icon, iAhk_general.ico ; icon dependency 
-; ~^s::Reload ; reload on save 
+~^s::Reload ; reload on save 
 
 ; one-liners 
-^!+S::^!+S ; fixes osu reload
+^!+S::^!+S ; fixes osu reload somehow 
 ::npp:: Notepad{+}{+}
 ::mbok::msgbox, 262144,, 
-#N::Run, DisplayTest.exe, %A_MyDocuments%\DisplayTest-master\DisplayTest-master ; win-n toggles night light 
+#N::Run, DisplayTest.exe, %A_MyDocuments%\DisplayTest-master ; win-n toggles night light 
 ^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; open process explorer
 
 ; ctrl+h for queueing handbrake remuxes (24 items = 24 loops, etc)
@@ -29,6 +29,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 		Else 
 			Loop, %loopCount% 
 			{
+				WinActivate, HandBrake ; redundant switch to handbrake for safety 
 				WinMaximize ; force maximize so cm screen works - coordmode client is inconsistent idk why 
 				Click, 159, 153 ; start from top of the queue
 				CoordMode, Mouse, Screen ; coordmode checks whole screen 
@@ -65,45 +66,41 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 	Tab::Enter
 #ifWinActive
 
-; mpv dupe maps
+; mpv dupe key maps
 #ifWinActive ahk_exe mpv.exe 
 	Esc::q
 	NumpadEnter::f
 	Enter::f
 #ifWinActive
 	
-; league
+; league maps
 #IfWinActive League of Legends
 	:C1:er::/fullmute all ; C1 case insensitive  
 #IfWinActive
 
-; iTunes 
+; iTunes maps 
 #IfWinActive iTunes
 	:o:kk::K-Pop   {BS}{BS}{BS}
 #IfWinActive
 
-
-; replace ;' with just a ' 
-:?*:`;'::
-	Send {'}
-	SplashTextOn, 190,25,AutoHotkey,oop
-	Sleep,260
-	SplashTextOff
-Exit
-
-; ignore rshift+up
->+Up::
-	SplashTextOn, 150,25,AutoHotkey,oop use LShift instead
-	Sleep,225
-	SplashTextOff
-Exit
-
-:?*:p[:: ; ignore p[ 
-	Send {p}
-	SplashTextOn, 150,25,AutoHotkey,oop 
-	Sleep,225
-	SplashTextOff
-Exit
+; you have fat fingers 
+	:?*:`;':: ; replace ;' with just a ' 
+		Send {'}
+		SplashTextOn, 190,25,AutoHotkey,oop
+		Sleep,260
+		SplashTextOff
+	Exit
+	>+Up:: ; ignore rshift+up
+		SplashTextOn, 150,25,AutoHotkey,oop use LShift instead
+		Sleep,225
+		SplashTextOff
+	Exit
+	:?*:p[:: ; ignore p[ 
+		Send {p}
+		SplashTextOn, 150,25,AutoHotkey,oop 
+		Sleep,225
+		SplashTextOff
+	Exit
 
 ; capslock only on 300ms doubletap, with notification 	
 	#ifWinNotActive, ahk_exe osu!.exe

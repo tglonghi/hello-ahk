@@ -5,11 +5,11 @@
 SendMode Input  ; Recommended for new scripts due to superior speed / reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 SetNumLockState, AlwaysOn ; nobody uses numpad mods
-#SingleInstance force ; if script is already running, cut it and run this one
+#SingleInstance force ; if script is already running, end it and run this one
 #KeyHistory 42 ; logging - one page, no scrolling
 SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact 
-#NoTrayIcon ; hides tray icon duh
-; ~^s::Reload 
+#NoTrayIcon ; hides tray icon 
+~^s::Reload 
 
 ; numpad shenanigans:
 ; /////////////////////////////////////////////////////////////////////////////////////
@@ -17,8 +17,8 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 	NumpadEnter::Send {BackSpace}, ; numdot nument into comma 
 	
 #If GetKeyState("NumpadDiv", "P")
-	Numpad7::Send {BackSpace}(
-	Numpad9::Send {BackSpace})
+	Numpad7::Send {BackSpace}( ; numdiv 7 into open paren 
+	Numpad9::Send {BackSpace}) ; numdiv 9 into close paren
 #If
 	
 ; numMinus into = on doubletap
@@ -44,7 +44,7 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 		}
 	Exit
 
-; k4 
+; c-a-n0 gooey  
 ^!Numpad0::
 	_TXT2= 
 (
@@ -120,21 +120,6 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 			
 		Esc::Gui Destroy
 	#IfWinActive
-		
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-; use numpad mods to toggle num lock / send intended command:
-; #IfWinNotActive ahk_exe osu!.exe 
-; 	NumpadPgDn::
-; 		SetNumLockState, On
-; 		Send {Numpad3}
-; 	Exit
-; 	NumpadPgUp::
-; 		SetNumLockState, On
-; 		Send {Numpad9}
-; 	Exit
-; #IfWinNotActive 
 
 ; up next: funky media stuff
 ; /////////////////////////////////////////////////////////////////////////////////////

@@ -8,7 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #KeyHistory 42 ; logging - one page, no scrolling
 SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact 
 #NoTrayIcon ; hides tray icon 
-; ~^s::Reload ; reload on save
+~^s::Reload ; reload on save
 
 
 #If MouseIsOver("ahk_class Shell_TrayWnd")

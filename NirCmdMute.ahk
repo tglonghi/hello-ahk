@@ -4,11 +4,11 @@
 #Warn ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to superior speed / reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-#SingleInstance force ; if script is already running, cut it and run this one
+#SingleInstance force ; if script is already running, end it and run this one
 #KeyHistory 42 ; logging - one page, no scrolling
 SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact 
-#NoTrayIcon ; hides tray icon duh
-; ~^s::Reload ; reload on save
+#NoTrayIcon ; hides tray icon 
+~^s::Reload ; reload on save
 
 #IfWinActive League of Legends
 	!NumpadEnter::
