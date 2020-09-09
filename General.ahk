@@ -10,7 +10,7 @@ SetNumLockState, AlwaysOn ; we like num lock
 SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact 
 GroupAdd, groupCapsLock, ahk_exe osu!.exe ; yes it's a group of one no I don't want to change it 
 Menu, Tray, Icon, iAhk_general.ico ; icon dependency 
-~^s::Reload ; reload on save 
+; ~^s::Reload ; reload on save 
 
 ; one-liners 
 ^!+S::^!+S ; fixes osu reload
@@ -60,10 +60,12 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 #ifWinActive ahk_class Windows.UI.Core.CoreWindow
 	:*:ww::Osu{!}
 	:*:aa::Logitech Gaming Software
+	:*:vv::Visual Studio Code
+	:*:cc::Adobe Photoshop CC 2019
 	Tab::Enter
 #ifWinActive
 
-; mpv maps
+; mpv dupe maps
 #ifWinActive ahk_exe mpv.exe 
 	Esc::q
 	NumpadEnter::f

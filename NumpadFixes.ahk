@@ -9,7 +9,7 @@ SetNumLockState, AlwaysOn ; nobody uses numpad mods
 #KeyHistory 42 ; logging - one page, no scrolling
 SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact 
 #NoTrayIcon ; hides tray icon duh
-~^s::Reload 
+; ~^s::Reload 
 
 ; numpad shenanigans:
 ; /////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 		SplashTextOn, 190,25,AutoHotkey,running k4 script
 		Sleep,300
 		SplashTextOff
-		Run, open %A_MyDocuments%\GitHub\hello-ahk\ahk_K4Func.ahk
+		Run, open %A_MyDocuments%\GitHub\hello-ahk\K4Script.ahk
 		Exit
 		
 	btnNo:
@@ -93,7 +93,7 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 		Sleep,300
 		SplashTextOff
 		DetectHiddenWindows, On 
-		WinClose, %A_MyDocuments%\GitHub\hello-ahk\ahk_K4Func.ahk ahk_class AutoHotkey
+		WinClose, %A_MyDocuments%\GitHub\hello-ahk\K4Script.ahk ahk_class AutoHotkey
 		Exit
 		
 	GuiClose:

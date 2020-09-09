@@ -1,2 +1,4 @@
 # hello-ahk
- small AutoHotKey projects for my convenience 
+ assorted AutoHotKey projects 
+
+ ### General.ahk: 

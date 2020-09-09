@@ -7,7 +7,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #KeyHistory 35
 Menu, Tray, Icon, iAhk_k4.ico
-~^s::Reload 
+; ~^s::Reload 
 
 ; Fixes dumb keyboard layout of k4 since they don't let you natively remap keys 
 

@@ -14,7 +14,7 @@ GroupAdd, groupBackspace, ahk_class RegEdit_RegEdit ; regedit
 GroupAdd, groupBackspace, ahk_class Photoshop ; cs5 
 GroupAdd, groupBackspace, ahk_class TfrmPdMain ; GRAHL PDF annotator
 GroupAdd, groupBackspace, ahk_exe Bridge.exe ; bridge 
-~^s::Reload 
+; ~^s::Reload 
 
 ; fix {ctrl}{backspace} for apps that have questionable support:
 
