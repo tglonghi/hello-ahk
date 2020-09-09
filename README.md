@@ -2,7 +2,7 @@
  assorted AutoHotKey projects 
 
  ### General.ahk: 
-    this holds the bulk of the scripts for many different applications 
+    this holds the bulk of the scripts for several different applications 
  ### K4Script.ahk:
     this remaps the keys on my K4 since Keychron doesn't use QMK like the rest of the world 
     this is called from the shortcut GUI detailed in general.ahk
