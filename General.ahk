@@ -22,7 +22,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 ; ctrl+h for queueing handbrake remuxes (24 items = 24 loops, etc)
 #ifWinActive ahk_exe HandBrake.exe
 	^h::
-		InputBox, loopCount, , enter item quantity: for 24 items do 24 loops etc ; dynamic loop count weee
+		InputBox, loopCount, , enter gakk count: for 24 items will do 24 loops etc ; dynamic loop count weee
 		If ErrorLevel
 			; canceled 
 			Exit
@@ -35,6 +35,8 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				CoordMode, Mouse, Screen ; coordmode checks whole screen 
 				Click, 287, 219 ; audio tab
 				Click, 115, 314 ; audio dropdown
+				; Click, 80, 258 ; ?add aud track 
+				; Click, 80, 287 ; ?click aud track 
 
 				; Click, 91, 324 ; SELECT AUDIO 1 (usually en aud)
 				Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
@@ -42,8 +44,8 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				Click, 342, 219 ; subtitles tab
 				Click, 127, 309 ; subtitles dropdown
 
-				; Click, 157, 350 ; SELECT SUBS 1 (usually en ss)
-				Click, 157, 365 ; SELECT SUBS 2 (usually en full)
+				Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
+				; Click, 157, 365 ; SELECT SUBS 2 (usually en full)
 
 				Click, 480, 305 ; check default box 
 				Click, 200, 75 ; add to queue 
