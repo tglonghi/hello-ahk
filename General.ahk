@@ -19,12 +19,11 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 #N::Run, DisplayTest.exe, %A_MyDocuments%\DisplayTest-master ; win-n toggles night light 
 ^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; open process explorer
 
-; fix mb3 double click 
-; g603 is starting to suffer from the doubleclick issue but rather than buying a new one or learning to solder, let's just make a really dumb script 
+; fix mb3 double click - g603 is starting to suffer from the doubleclick issue in the middle mouse button but rather than buying a new mouse or learning to solder, let's just make a really dumb script 
 	MButton:: 
 		If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 125)
 		{
-			; if mouse middle is doucleclicked within 125 ms, send a splash but no command
+			; if mouse middle is doucleclicked within 125 ms, send a splash but no command (based on minimum 130ms gap without deliberate effort)
 			SetCapsLockState, off
 			Splashimage,,b1 w130 h60 Y25 CTwhite CWblack fs10,`rdoubleclick
 			sleep,100
@@ -35,13 +34,11 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 			Send {MButton}
 		}
 		Return
-		; MORE ON SPLASHIMAGE: 
-		; autohotkey.com/docs/commands/Progress.htm#Window_Size_Position_and_Behavior
 
 ; ctrl+h for queueing handbrake remuxes (24 items = 24 loops, etc)
 #ifWinActive ahk_exe HandBrake.exe
 	^h::
-		InputBox, loopCount, , enter gakk count: for 24 items will do 24 loops etc ; dynamic loop count weee
+		InputBox, loopCount, , enter count: for 24 items will do 24 loops etc ; dynamic loop count weee
 		If ErrorLevel
 			; canceled 
 			Exit
