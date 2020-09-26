@@ -19,6 +19,25 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 #N::Run, DisplayTest.exe, %A_MyDocuments%\DisplayTest-master ; win-n toggles night light 
 ^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; open process explorer
 
+; fix mb3 double click 
+; g603 is starting to suffer from the doubleclick issue but rather than buying a new one or learning to solder, let's just make a really dumb script 
+	MButton:: 
+		If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 125)
+		{
+			; if mouse middle is doucleclicked within 125 ms, send a splash but no command
+			SetCapsLockState, off
+			Splashimage,,b1 w130 h60 Y25 CTwhite CWblack fs10,`rdoubleclick
+			sleep,100
+			Splashimage,off
+		}
+		Else
+		{
+			Send {MButton}
+		}
+		Return
+		; MORE ON SPLASHIMAGE: 
+		; autohotkey.com/docs/commands/Progress.htm#Window_Size_Position_and_Behavior
+
 ; ctrl+h for queueing handbrake remuxes (24 items = 24 loops, etc)
 #ifWinActive ahk_exe HandBrake.exe
 	^h::
@@ -33,19 +52,19 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				WinMaximize ; force maximize so cm screen works - coordmode client is inconsistent idk why 
 				Click, 159, 153 ; start from top of the queue
 				CoordMode, Mouse, Screen ; coordmode checks whole screen 
-				Click, 287, 219 ; audio tab
-				Click, 115, 314 ; audio dropdown
+				; Click, 287, 219 ; audio tab
+				; Click, 115, 314 ; audio dropdown
 				; Click, 80, 258 ; ?add aud track 
 				; Click, 80, 287 ; ?click aud track 
 
 				; Click, 91, 324 ; SELECT AUDIO 1 (usually en aud)
-				Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
+				; Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
 
 				Click, 342, 219 ; subtitles tab
 				Click, 127, 309 ; subtitles dropdown
 
-				Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
-				; Click, 157, 365 ; SELECT SUBS 2 (usually en full)
+				; Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
+				Click, 157, 365 ; SELECT SUBS 2 (usually en full)
 
 				Click, 480, 305 ; check default box 
 				Click, 200, 75 ; add to queue 
