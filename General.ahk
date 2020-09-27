@@ -47,7 +47,8 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 			{
 				WinActivate, HandBrake ; redundant switch to handbrake for safety 
 				WinMaximize ; force maximize so cm screen works - coordmode client is inconsistent idk why 
-				Click, 159, 153 ; start from top of the queue
+				Click, 159, 136 ; open queue to start from top 
+				Click, 159, 153 ; select from top of the queue
 				CoordMode, Mouse, Screen ; coordmode checks whole screen 
 				; Click, 287, 219 ; audio tab
 				; Click, 115, 314 ; audio dropdown
