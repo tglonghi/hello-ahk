@@ -74,6 +74,15 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 		; end msgbox yes 
 #ifWinActive
 
+; pano text entry shortcuts 
+#ifWinActive ahk_exe Notepad++.exe
+	::bopan::Canon 6Dii, 135 f2 --> 24 f0.9 {Enter}Distance: xm/x ft, x images {Enter}desc
+#ifWinActive ahk_exe Chrome.exe 
+	::bp25::135{tab}2{tab}1560{tab}1040{tab}
+	::bp50::135{tab}2{tab}3120{tab}2080{tab}
+	::bp100::135{tab}2{tab}4160{tab}6240{tab}
+#IfWinActive
+
 ; start menu LH shortcuts 
 #ifWinActive ahk_class Windows.UI.Core.CoreWindow
 	:*:ww::Osu{!}
