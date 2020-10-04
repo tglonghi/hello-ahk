@@ -21,7 +21,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 
 ; fix mb3 double click - g603 is starting to suffer from the doubleclick issue in the middle mouse button but rather than buying a new mouse or learning to solder, let's just make a really dumb script 
 	MButton:: 
-		If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 125)
+		If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 75)
 		{
 			; if mouse middle is doucleclicked within 125 ms, send a splash but no command (based on minimum 130ms gap without deliberate effort)
 			SetCapsLockState, off
@@ -54,7 +54,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				; Click, 80, 287 ; ?click aud track 
 
 				; Click, 91, 324 ; SELECT AUDIO 1 (usually en aud)
-				; Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
+				Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
 
 				Click, 342, 219 ; subtitles tab
 				Click, 127, 309 ; subtitles dropdown
@@ -62,7 +62,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				; Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
 				Click, 157, 365 ; SELECT SUBS 2 (usually en full)
 
-				Click, 480, 305 ; check default box 
+				Click, 480, 305 ; check sub default box 
 				Click, 200, 75 ; add to queue 
 				Click, 150, 135 ; item dropdown 
 				Send {Down} {Enter} ; next item 
