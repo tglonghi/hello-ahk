@@ -39,10 +39,13 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 #ifWinActive ahk_exe HandBrake.exe
 	^h::
 		InputBox, loopCount, , enter demi count: for 24 items will do 24 loops etc ; dynamic loop count weee
+
 		If ErrorLevel
 			; canceled 
 			Exit
 		Else 
+			InputBox, inputAud, , enter audio option ; dynamic aud drop select 
+			InputBox, inputSub, , enter sub option ; dynamic sub drop select 
 			WinMaximize ; force maximize so cm screen works - coordmode client is inconsistent idk why 
 			Loop, %loopCount% 
 			{
@@ -52,16 +55,24 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				; Click, 115, 314 ; audio dropdown
 				; Click, 80, 258 ; ?add aud track 
 				; Click, 80, 287 ; ?click aud track 
-
-				; Click, 91, 324 ; SELECT AUDIO 1 (usually en aud)
-				Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
-
+				If (inputAud = 1)
+				{
+					Click, 91, 324 ; SELECT AUDIO 1 (usually en aud)
+				}
+				Else If (inputAud = 2)
+				{
+					Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
+				}
 				Click, 342, 219 ; subtitles tab
 				Click, 127, 309 ; subtitles dropdown
-
-				; Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
-				Click, 157, 365 ; SELECT SUBS 2 (usually en full)
-
+				If (inputAud = 1)
+				{
+					Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
+				}
+				Else If (inputAud = 2)
+				{
+					Click, 157, 365 ; SELECT SUBS 2 (usually en full)
+				}
 				Click, 480, 305 ; check sub default box 
 				Click, 200, 75 ; add to queue 
 				Click, 150, 135 ; item dropdown 
