@@ -168,8 +168,8 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 	; allow clicking on tablets 
 		F1:: Send {LButton}
 	; LH volume control 
-		^r:: Send {Volume_Up}
-		^f:: Send {Volume_Down}
+		^r:: Send {Volume_Up}{Volume_Up}
+		^f:: Send {Volume_Down}{Volume_Down}
 		^e:: Up
 		^d:: Down
 	; backtick for LH enter
