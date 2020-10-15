@@ -20,60 +20,53 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 ^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; open process explorer
 
 ; fix mb3 double click - g603 is starting to suffer from the doubleclick issue in the middle mouse button but rather than buying a new mouse or learning to solder, let's just make a really dumb script 
-	MButton:: 
-		If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 75)
-		{
-			; if mouse middle is doucleclicked within 125 ms, send a splash but no command (based on minimum 130ms gap without deliberate effort)
-			SetCapsLockState, off
-			Splashimage,,b1 w130 h60 Y25 CTwhite CWblack fs10,`rdoubleclick
-			sleep,100
-			Splashimage,off
-		}
-		Else
-		{
-			Send {MButton}
-		}
-		Return
+; known problem: this removes dragging mb3 to navigate, it turns into a toggle instead of a hold which is really annoying if you're used to a hold 
+	; MButton:: 
+	; 	If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 75)
+	; 	{
+	; 		; if mouse middle is doucleclicked within 125 ms, send a splash but no command (based on minimum 130ms gap without deliberate effort)
+	; 		SetCapsLockState, off
+	; 		Splashimage,,b1 w130 h60 Y25 CTwhite CWblack fs10,`rdoubleclick
+	; 		sleep,100
+	; 		Splashimage,off
+	; 	}
+	; 	Else
+	; 	{
+	; 		Send {MButton}
+	; 	}
+	; 	Return
 
 ; ctrl+h for queueing handbrake remuxes (24 items = 24 loops, etc)
 #ifWinActive ahk_exe HandBrake.exe
-	^h::
-		InputBox, loopCount, , enter demi count: for 24 items will do 24 loops etc ; dynamic loop count weee
+	^h:: ; normal mkv remux
+		InputBox, loopCount, , enter derp count: for 24 items will do 24 loops etc ; dynamic loop count weee
 
-		If ErrorLevel
+		If (loopcount = 0) 
 			; canceled 
 			Exit
 		Else 
 			InputBox, inputAud, , enter audio option ; dynamic aud drop select 
-			InputBox, inputSub, , enter sub option ; dynamic sub drop select 
+			--inputAud ; aud dropdown starts at 1 not zero 
+			InputBox, inputSub, , enter sub option ; dynamic sub drop select (subs start at 0 so no decrement) 
 			WinMaximize ; force maximize so cm screen works - coordmode client is inconsistent idk why 
 			Loop, %loopCount% 
 			{
 				WinActivate, HandBrake ; redundant switch to handbrake for safety 
 				CoordMode, Mouse, Screen ; coordmode checks whole screen 
-				; Click, 287, 219 ; audio tab
-				; Click, 115, 314 ; audio dropdown
+
+				Click, 287, 219 ; audio tab
+				Click, 115, 314 ; audio dropdown
 				; Click, 80, 258 ; ?add aud track 
 				; Click, 80, 287 ; ?click aud track 
-				If (inputAud = 1)
-				{
-					Click, 91, 324 ; SELECT AUDIO 1 (usually en aud)
-				}
-				Else If (inputAud = 2)
-				{
-					Click, 91, 344 ; SELECT AUDIO 2 (usually jp aud)
-				}
+				Click, 91, 324 ; select first aud choice
+				Send {Down %inputAud%} ; offset choices by aud input box amount
+
 				Click, 342, 219 ; subtitles tab
 				Click, 127, 309 ; subtitles dropdown
-				If (inputAud = 1)
-				{
-					Click, 157, 345 ; SELECT SUBS 1 (usually en ss)
-				}
-				Else If (inputAud = 2)
-				{
-					Click, 157, 365 ; SELECT SUBS 2 (usually en full)
-				}
+				Click, 155, 325 ; select FAS (0 offset)
+				Send {Down %inputSub%}
 				Click, 480, 305 ; check sub default box 
+				
 				Click, 200, 75 ; add to queue 
 				Click, 150, 135 ; item dropdown 
 				Send {Down} {Enter} ; next item 
@@ -83,11 +76,40 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 			}
 			Exit 
 		; end msgbox yes 
+
+	^g:: ; special mp4 remux for danganronpa, left in case it ever happens again
+		InputBox, loopCount, , !!!enter darpa count ; dynamic loop count weee
+		If ErrorLevel
+			; canceled 
+			Exit
+		Else 
+			WinMaximize ; force maximize so cm screen works - coordmode client is inconsistent idk why 
+			Loop, %loopCount% 
+			{
+				WinActivate, HandBrake ; redundant switch to handbrake for safety 
+				CoordMode, Mouse, Screen ; coordmode checks whole screen 
+				Click, 287, 219 ; audio tab
+				Click, 150, 260 ; ?click "clear" 
+				Click, 80, 258 ; ?click "add track"
+				Click, 80, 287 ; ?click "add new track" option 
+				; Click, 260, 305 ; codec drop
+				; Click, 260, 395 ; codec auto
+				; Click, 342, 219 ; subtitles tab
+				; Click, 335, 305 ; check forced only box 
+				; Click, 480, 305 ; check sub default box 
+				Click, 200, 75 ; add to queue 
+				Click, 150, 135 ; item dropdown 
+				Send {Down} {Enter} ; next item 
+				
+				if GetKeyState("Esc", "P") ;  see if escape is pressed
+					break  ; exits Loop
+			}
+			Exit 
 #ifWinActive
 
 ; pano text entry shortcuts 
-#ifWinActive ahk_exe Notepad++.exe
-	::bopan::Canon 6Dii, 135 f2 --> 24 f0.9 {Enter}Distance: xm/x ft, x images {Enter}desc
+; #ifWinActive ahk_exe Notepad++.exe
+	::bopanv::Canon 6Dii, 135 f2 --> 24 f0.9 {Enter}Distance: xm/x ft, x images {Enter}desc
 #ifWinActive ahk_exe Chrome.exe 
 	::bp25::135{tab}2{tab}1560{tab}1040{tab}
 	::bp50::135{tab}2{tab}3120{tab}2080{tab}
