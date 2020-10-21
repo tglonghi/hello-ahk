@@ -109,12 +109,19 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 
 ; pano text entry shortcuts 
 ; #ifWinActive ahk_exe Notepad++.exe
-	::bopanv::Canon 6Dii, 135 f2 --> 24 f0.9 {Enter}Distance: xm/x ft, x images {Enter}desc
+	::bopanv::Canon 6Dii, 135 f2 --> xxfxx {Enter}Distance: mft, xxx images {Enter}desc
 #ifWinActive ahk_exe Chrome.exe 
 	::bp25::135{tab}2{tab}1560{tab}1040{tab}
 	::bp50::135{tab}2{tab}3120{tab}2080{tab}
 	::bp100::135{tab}2{tab}4160{tab}6240{tab}
 #IfWinActive
+
+; mouse wheel left binds - g502 wireless is here! 
+#ifWinActive ahk_exe Photoshop.exe
+	F20::^i ; mw left to invert 
+#IfWinActive ahk_exe chrome.exe
+	F20::F11 ; mw left to fullscreen
+#IfWinActive 
 
 ; start menu LH shortcuts 
 #ifWinActive ahk_class Windows.UI.Core.CoreWindow
@@ -135,6 +142,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 ; league maps
 #IfWinActive League of Legends
 	:C1:er::/fullmute all ; C1 case insensitive  
+	; :*:F13::5 ; thumb button context limiter - doesn't work for non alphanumerics (and you need those for typing), maybe look into sendraw or something 
 #IfWinActive
 
 ; iTunes maps 
