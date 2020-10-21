@@ -59,12 +59,16 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 				; Click, 80, 258 ; ?add aud track 
 				; Click, 80, 287 ; ?click aud track 
 				Click, 91, 324 ; select first aud choice
-				Send {Down %inputAud%} ; offset choices by aud input box amount
+				sleep, 75 ; prevents sporadic arrow skipping 
+				Send {Down %inputAud%} ; down by aud input amount
+				sleep, 75 ; prevents sporadic arrow skipping 
 
 				Click, 342, 219 ; subtitles tab
 				Click, 127, 309 ; subtitles dropdown
 				Click, 155, 325 ; select FAS (0 offset)
-				Send {Down %inputSub%}
+				sleep, 75 ; prevents sporadic arrow skipping 
+				Send {Down %inputSub%} ; down by sub input amount 
+				sleep, 75 ; prevents sporadic arrow skipping 
 				Click, 480, 305 ; check sub default box 
 				
 				Click, 200, 75 ; add to queue 
