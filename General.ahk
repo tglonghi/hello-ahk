@@ -18,6 +18,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 ::mbok::msgbox, 262144,, 
 #N::Run, DisplayTest.exe, %A_MyDocuments%\DisplayTest-master ; win-n toggles night light 
 ^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; open process explorer
+#T::Send {Home}{Del}{End}{BS} ; win-t trims first and last char of line
 
 ; fix mb3 double click - g603 is starting to suffer from the doubleclick issue in the middle mouse button but rather than buying a new mouse or learning to solder, let's just make a really dumb script 
 ; known problem: this removes dragging mb3 to navigate, it turns into a toggle instead of a hold which is really annoying if you're used to a hold 
