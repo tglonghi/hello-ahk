@@ -15,27 +15,11 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 ; one-liners 
 ^!+S::^!+S ; fixes osu reload somehow 
 ::npp:: Notepad{+}{+}
-::mbok::msgbox, 262144,, 
+::mbok::msgbox, 262144,, ; lazy lazy ahk debugger
 #N::Run, DisplayTest.exe, %A_MyDocuments%\DisplayTest-master ; win-n toggles night light 
-^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; open process explorer
+^Esc::Run, procexp64.exe, %A_MyDocuments%\ProcessExplorer ; ctrl-esc opens process explorer
 #T::Send {Home}{Del}{End}{BS} ; win-t trims first and last char of line
-
-; fix mb3 double click - g603 is starting to suffer from the doubleclick issue in the middle mouse button but rather than buying a new mouse or learning to solder, let's just make a really dumb script 
-; known problem: this removes dragging mb3 to navigate, it turns into a toggle instead of a hold which is really annoying if you're used to a hold 
-	; MButton:: 
-	; 	If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 75)
-	; 	{
-	; 		; if mouse middle is doucleclicked within 125 ms, send a splash but no command (based on minimum 130ms gap without deliberate effort)
-	; 		SetCapsLockState, off
-	; 		Splashimage,,b1 w130 h60 Y25 CTwhite CWblack fs10,`rdoubleclick
-	; 		sleep,100
-	; 		Splashimage,off
-	; 	}
-	; 	Else
-	; 	{
-	; 		Send {MButton}
-	; 	}
-	; 	Return
+~LAlt Up:: return ; apparently windows is retarded? idk fixes sticky alt issues in ps and more  https://redd.it/388gll
 
 ; ctrl+h for queueing handbrake remuxes (24 items = 24 loops, etc)
 #ifWinActive ahk_exe HandBrake.exe
@@ -113,7 +97,6 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 #ifWinActive
 
 ; pano text entry shortcuts 
-; #ifWinActive ahk_exe Notepad++.exe
 	::bopanv::Canon 6Dii, 135 f2 --> xxfxx {Enter}Distance: mft, xxx images {Enter}desc
 #ifWinActive ahk_exe Chrome.exe 
 	::bp25::135{tab}2{tab}1560{tab}1040{tab}
@@ -124,8 +107,6 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 ; mouse wheel left binds - g502 wireless is here! 
 #ifWinActive ahk_exe Photoshop.exe
 	F20::^i ; mw left to invert 
-#IfWinActive ahk_exe chrome.exe
-	F20::F11 ; mw left to fullscreen
 #IfWinActive 
 
 ; start menu LH shortcuts 
@@ -159,18 +140,18 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 	:?*:`;':: ; replace ;' with just a ' 
 		Send {'}
 		SplashTextOn, 190,25,AutoHotkey,oop
-		Sleep,260
+		Sleep,200
 		SplashTextOff
 	Exit
 	>+Up:: ; ignore rshift+up
 		SplashTextOn, 150,25,AutoHotkey,oop use LShift instead
-		Sleep,225
+		Sleep,250
 		SplashTextOff
 	Exit
 	:?*:p[:: ; ignore p[ 
 		Send {p}
 		SplashTextOn, 150,25,AutoHotkey,oop 
-		Sleep,225
+		Sleep,200
 		SplashTextOff
 	Exit
 
@@ -180,14 +161,14 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 			If (A_ThisHotkey == A_PriorHotkey && A_TimeSincePriorHotkey < 300)
 			{
 				If GetKeyState("CapsLock", "T")
-				{
+				{ ; if turning off caps, blacks caps off box flashes 
 					SetCapsLockState, off
 					Splashimage,,b1 w130 h100 Y25 CTwhite CWblack fs10,`r`r c a p s   o f f
 					sleep,325
 					Splashimage,off
 				}
 				else
-				{			
+				{ ; if turning on caps, white CAPS ON box flashes 	
 					SetCapsLockState, on
 					Splashimage,,b1 w130 h100 Y25 CWwhite CTblack m9 fs10,`r`rC A P S   O N 
 					sleep,325
@@ -200,7 +181,7 @@ Menu, Tray, Icon, iAhk_general.ico ; icon dependency
 	#ifWinNotActive
 ; osu! binds
 #ifWinActive, ahk_exe osu!.exe
-	; allow clicking on tablets 
+	; allow clicking on tablets (can't check for tablet input so just blankets when osu is running)
 		F1:: Send {LButton}
 	; LH volume control 
 		^r:: Send {Volume_Up}{Volume_Up}

@@ -44,7 +44,7 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 		}
 	Exit
 
-; c-a-n0 gooey  
+; ctrl-alt-num0 gooey  
 ^!Numpad0::
 	_TXT2= 
 (
@@ -101,7 +101,7 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 		Gui Destroy
 		Exit
 
-	; allow nums 123 as alt selectors 
+	; allow nums 123 as alt selectors when dealing w k4 box 
 	#IfWinActive Keyboard-Check-001
 		Numpad1::
 		1::

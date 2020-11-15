@@ -10,6 +10,7 @@ SetTitleMatchMode 2 ; 1 starts with / 2 anywhere within / 3 exact
 #NoTrayIcon ; hides tray icon 
 ~^s::Reload ; reload on save
 
+; hardcoding bc it gets weird if I don't 
 #IfWinActive League of Legends
 	!NumpadEnter::
 		run %A_AppData%\nircmd-x64\nircmd.exe muteappvolume "League of Legends.exe" 2
